@@ -38,6 +38,12 @@ void MainWindow::on_chkNormal_stateChanged(int arg1)
     ui->openGLWidget->setMode(GL_POINT);
 }
 
+void MainWindow::on_chkStipple_stateChanged(int arg1)
+{
+    qDebug() << "Stipple selected "<<arg1;
+    ui->openGLWidget->setMode(GL_POLYGON_STIPPLE);
+}
+
 void MainWindow::on_btnCube_clicked()
 {
     qDebug() << "Cube";
@@ -110,10 +116,7 @@ void MainWindow::on_sldScale_valueChanged(int value)
     ui->lblScale->setText(s);
 }
 
-void MainWindow::on_chkStipple_stateChanged(int arg1)
-{
 
-}
 
 void MainWindow::on_chkColor_stateChanged(int arg1)
 {
