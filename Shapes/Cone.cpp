@@ -8,18 +8,24 @@
 
 using namespace std;
 
-void Cone::toString() {
+void Cone::toString()
+{
     qDebug() << "Cone shape was selected \n";
 }
 
-void Cone::setVertices(int segX, int segY) {
+void Cone::setVertices(int segX, int segY)
+{
+    
 
 }
 
-void Cone::setColors() {
+void Cone::setColors()
+{
 
 }
 
-void Cone::draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY) {
+void Cone::draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY)
+{
 
 }
+

@@ -15,15 +15,20 @@ MyOpenGLWidget::MyOpenGLWidget(QWidget *parent)
 {
     alpha = 25;
     beta = -25;
-    distance = 2.5;
-    segmentsX = 8;
-    segmentsY = 25;
-    currentShape = 5;
+    distance = 6;
+    segmentsX = 10;
+    segmentsY = 10;
+    currentShape = 1;
 }
 
 void MyOpenGLWidget::setDistance(int value)
 {
-    distance = 2.5 + (value * 2.0f / 100);
+    if(value>=100){
+        distance = 6 - (value * 1.0f / 100);
+    }else{
+        distance = 6 + (value * 1.0f / 100);
+    }
+
     update();
 }
 
