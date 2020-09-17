@@ -69,12 +69,16 @@ void MainWindow::on_sldSegmentsX_sliderMoved(int position)
 {
      qDebug() << "segmentsX position: "<<position;
      ui->openGLWidget->setSegmentsX(position);
+     QString s = QString::number(position);
+     ui->lblSegmentsX->setText(s);
 }
 
 void MainWindow::on_sldSegmentsY_sliderMoved(int position)
 {
      qDebug() << "segmentsY position: "<<position;
      ui->openGLWidget->setSegmentsY(position);
+     QString s = QString::number(position);
+     ui->lblSegmentsY->setText(s);
 }
 
 void MainWindow::on_sldRotateX_sliderMoved(int position)

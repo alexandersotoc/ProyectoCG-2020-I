@@ -15,15 +15,20 @@ MyOpenGLWidget::MyOpenGLWidget(QWidget *parent)
 {
     alpha = 25;
     beta = -25;
-    distance = 2.5;
-    segmentsX = 8;
-    segmentsY = 25;
-    currentShape = 5;
+    distance = 6;
+    segmentsX = 10;
+    segmentsY = 10;
+    currentShape = 1;
 }
 
 void MyOpenGLWidget::setDistance(int value)
 {
-    distance = 2.5 + (value * 2.0f / 100);
+    if(value>=100){
+        distance = 6 - (value * 1.0f / 100);
+    }else{
+        distance = 6 + (value * 1.0f / 100);
+    }
+
     update();
 }
 
@@ -52,7 +57,7 @@ void MyOpenGLWidget::setCurrentShape(int _currentShape)
 void MyOpenGLWidget::initializeGL()
 {
     glEnable(GL_DEPTH_TEST);
-    glEnable(GL_CULL_FACE);
+//    glEnable(GL_CULL_FACE);
     glClearColor(0, 0, 0, 1);
 
     shaderProgram.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/vertexShader.vsh");
