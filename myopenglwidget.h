@@ -18,6 +18,9 @@ public:
     void setSegmentsX(int _segmentsX);
     void setSegmentsY(int _segmentsY);
     void setCurrentShape(int _currentShape);
+    void rotateX(int rX);
+    void rotateY(int rY);
+    void rotateZ(int rZ);
 protected:
     void initializeGL() override;
     void paintGL() override;
@@ -39,6 +42,7 @@ private:
 
     double alpha;
     double beta;
+    double zeta;
     double distance;
     QPoint lastMousePosition;
 

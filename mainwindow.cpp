@@ -84,16 +84,29 @@ void MainWindow::on_sldSegmentsY_sliderMoved(int position)
 void MainWindow::on_sldRotateX_sliderMoved(int position)
 {
     qDebug() << "rotateX position: "<<position;
+    ui->openGLWidget->rotateX(position);
+
+    QString s = QString::number(position);
+    ui->lblRotateX->setText(s);
+
 }
 
 void MainWindow::on_sldRotateY_sliderMoved(int position)
 {
     qDebug() << "rotateY position: "<<position;
+    ui->openGLWidget->rotateY(position);
+
+    QString s = QString::number(position);
+    ui->lblRotateY->setText(s);
 }
 
 void MainWindow::on_sldRotateZ_sliderMoved(int position)
 {
     qDebug() << "rotateZ position: "<<position;
+    ui->openGLWidget->rotateZ(position);
+
+    QString s = QString::number(position);
+    ui->lblRotateZ->setText(s);
 }
 
 void MainWindow::on_sldScale_sliderMoved(int position)
