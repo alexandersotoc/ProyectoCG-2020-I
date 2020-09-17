@@ -46,6 +46,10 @@ private slots:
 
     void on_sldScale_valueChanged(int value);
 
+    void on_chkStipple_stateChanged(int arg1);
+
+    void on_chkColor_stateChanged(int arg1);
+
 private:
     Ui::MainWindow *ui;
 };

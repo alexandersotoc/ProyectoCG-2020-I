@@ -22,6 +22,7 @@ public:
     void rotateY(int rY);
     void rotateZ(int rZ);
     void setMode(GLenum mode);
+    void setColor(bool color);
 protected:
     void initializeGL() override;
     void paintGL() override;
@@ -49,6 +50,7 @@ private:
     QPoint lastMousePosition;
 
     QVector<GLenum> modes;
+    boolean color;
 };
 
 #endif // MYOPENGLWIDGET_H

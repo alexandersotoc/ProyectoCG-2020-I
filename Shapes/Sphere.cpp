@@ -61,12 +61,16 @@ void Sphere::setVertices(int segX, int segY) {
 
 }
 
-void Sphere::setColors() {
+void Sphere::setColors(bool color) {
 
     float r = 1.0 , g = 0.0 , b = 0.0;
     srand(6667);
 
     for (int i=0; i<vertices.length(); i++){
+        if(!color){
+            colors.push_back(QVector3D(0.8,0.8,0.8));
+            continue;
+        }
 
         if(i%3==0){
             r = (rand()%256)/255.0f;
@@ -78,7 +82,8 @@ void Sphere::setColors() {
 
 }
 
-void Sphere::draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY, QVector<GLenum> modes) {
+void Sphere::draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY, QVector<GLenum> modes,
+                  bool color) {
     if(modes.isEmpty()) return;
 
     for(int i=0;i<modes.size();i++){
@@ -93,11 +98,11 @@ void Sphere::draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmen
             glLineWidth(3.0);
             glEnable(GL_LINE_SMOOTH);
         }else if(modes[i]== GL_POINT){
-            setColors();
+            setColors(color);
             glPointSize(5.0);
             glEnable( GL_POINT_SMOOTH );
         }
-        else setColors();
+        else setColors(color);
 
         shaderProgram->setAttributeArray("vertex", vertices.constData());
         shaderProgram->enableAttributeArray("vertex");

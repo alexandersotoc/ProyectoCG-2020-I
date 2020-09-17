@@ -34,18 +34,17 @@ void Special::setVertices(int segX, int segY) {
    }
 }
 
-void Special::setColors() {
-//    int cantidadDePuntos = segmentsX  * (segmentsY + 1) * 2;
-
-//    for (int i = 0; i < cantidadDePuntos; i++) {
-//        colors.push_back(QVector3D(generateRandomNumber(), generateRandomNumber(), generateRandomNumber()));
-//    }
-
+void Special::setColors(bool color) {
     float r, g, b;
     srand(6667);
 
     for (int i = 0; i < vertices.size(); i++)
     {
+        if(!color){
+            colors.push_back(QVector3D(0.8,0.8,0.8));
+            continue;
+        }
+
         if (i % 3 == 0)
         {
             r = (rand() % 256) / 255.0f;
@@ -57,7 +56,8 @@ void Special::setColors() {
     }
 }
 
-void Special::draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY, QVector<GLenum> modes) {
+void Special::draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY, QVector<GLenum> modes,
+                   bool color) {
     if(modes.isEmpty()) return;
 
 
@@ -73,11 +73,11 @@ void Special::draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segme
             glLineWidth(3.0);
             glEnable(GL_LINE_SMOOTH);
         }else if(modes[i]== GL_POINT){
-            setColors();
+            setColors(color);
             glPointSize(5.0);
             glEnable( GL_POINT_SMOOTH );
         }
-        else setColors();
+        else setColors(color);
 
         shaderProgram->setAttributeArray("vertex", vertices.constData());
         shaderProgram->enableAttributeArray("vertex");

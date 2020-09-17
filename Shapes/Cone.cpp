@@ -19,13 +19,18 @@ void Cone::setVertices(int segX, int segY)
     drawBaseCone(0.0f, -0.5f, 0.0f,  1.5f,  segX);
 }
 
-void Cone::setColors()
+void Cone::setColors(bool color)
 {
     float r, g, b;
     srand(6667);
 
     for (int i = 0; i < vertices.size(); i++)
     {
+        if(!color){
+            colors.push_back(QVector3D(0.8,0.8,0.8));
+            continue;
+        }
+
         if (i % 3 == 0)
         {
             r = (rand() % 256) / 255.0f;
@@ -37,7 +42,8 @@ void Cone::setColors()
     }
 }
 
-void Cone::draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY, QVector<GLenum> modes)
+void Cone::draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY, QVector<GLenum> modes,
+                bool color)
 {
     if(modes.isEmpty()) return;
 
@@ -53,11 +59,11 @@ void Cone::draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segments
             glLineWidth(3.0);
             glEnable(GL_LINE_SMOOTH);
         }else if(modes[i]== GL_POINT){
-            setColors();
+            setColors(color);
             glPointSize(5.0);
             glEnable( GL_POINT_SMOOTH );
         }
-        else setColors();
+        else setColors(color);
 
         shaderProgram->setAttributeArray("vertex", vertices.constData());
         shaderProgram->enableAttributeArray("vertex");

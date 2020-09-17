@@ -75,11 +75,16 @@ void Cylinder::setVertices(int segX, int segY) {
     }
 }
 
-void Cylinder::setColors() {
+void Cylinder::setColors(bool color) {
   float r, g , b;
   srand(6667);
 
   for (int i = 0; i < vertices.size() ; i++ ) {
+      if(!color){
+          colors.push_back(QVector3D(0.8,0.8,0.8));
+          continue;
+      }
+
       if(i%3 == 0){
           r = (rand()%256/255.0f);
           g = (rand()%256/255.0f);
@@ -90,7 +95,8 @@ void Cylinder::setColors() {
 
 }
 
-void Cylinder::draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY, QVector<GLenum> modes) {
+void Cylinder::draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY, QVector<GLenum> modes,
+                    bool color) {
     if(modes.isEmpty()) return;
 
     for(int i=0;i<modes.size();i++){
@@ -105,11 +111,11 @@ void Cylinder::draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segm
             glLineWidth(3.0);
             glEnable(GL_LINE_SMOOTH);
         }else if(modes[i]== GL_POINT){
-            setColors();
+            setColors(color);
             glPointSize(5.0);
             glEnable( GL_POINT_SMOOTH );
         }
-        else setColors();
+        else setColors(color);
 
         shaderProgram->setAttributeArray("vertex", vertices.constData());
         shaderProgram->enableAttributeArray("vertex");

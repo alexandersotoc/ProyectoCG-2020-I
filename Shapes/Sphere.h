@@ -7,13 +7,14 @@
 class Sphere: public Shape {
     private:
         void setVertices(int segmentsX, int segmentsY);
-        void setColors();
+        void setColors(bool color);
         float radio = 0.5;
         float FinalTeta=PI;
         float FinalPhi=2*PI;
     public:
         void toString();
-        void draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY, QVector<GLenum> modes);
+        void draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY, QVector<GLenum> modes,
+                  bool color);
 };
 
 #endif

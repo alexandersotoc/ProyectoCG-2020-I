@@ -21,6 +21,7 @@ MyOpenGLWidget::MyOpenGLWidget(QWidget *parent)
     segmentsY = 10;
     currentShape = 1;
     modes.append(GL_FILL);
+    color = true;
 }
 
 void MyOpenGLWidget::setDistance(int value)
@@ -59,6 +60,12 @@ void MyOpenGLWidget::setMode(GLenum mode)
     if(position == -1) modes.append(mode);
     else modes.remove(position);
 
+    update();
+}
+
+void MyOpenGLWidget::setColor(bool color)
+{
+    this->color = color;
     update();
 }
 
@@ -125,7 +132,7 @@ void MyOpenGLWidget::paintGL()
 
     shaderProgram.setUniformValue("mvpMatrix", pMatrix * vMatrix * mMatrix);
 
-    chosenShape->draw(&shaderProgram, segmentsX, segmentsY, modes);
+    chosenShape->draw(&shaderProgram, segmentsX, segmentsY, modes, color);
 
     shaderProgram.disableAttributeArray("vertex");
 

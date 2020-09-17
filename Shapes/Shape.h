@@ -13,11 +13,12 @@ class Shape {
         void solidColor();
     private:
         virtual void setVertices(int segmentsX, int segmentsY) = 0;
-        virtual void setColors() = 0;
+        virtual void setColors(bool color) = 0;
     public:
         static Shape *chooseShape(int choice);
         virtual void toString() = 0;
-        virtual void draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY, QVector<GLenum> modes) = 0;
+        virtual void draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY, QVector<GLenum> modes,
+                          bool color) = 0;
 };
 
 #endif
