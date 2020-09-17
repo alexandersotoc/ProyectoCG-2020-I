@@ -35,6 +35,7 @@ void Cube::setVertices(int segX, int segY) {
 
 void Cube::setColors() {
     float r, g, b;
+
     srand(6667);
 
     for (int i = 0; i < vertices.size(); i++)
@@ -50,20 +51,36 @@ void Cube::setColors() {
     }
 }
 
-void Cube::draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY, GLenum mode) {
+void Cube::draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY, QVector<GLenum> modes) {
+    if(modes.isEmpty()) return;
 
-    glPolygonMode(GL_FRONT_AND_BACK, mode);
+    for(int i=0;i<modes.size();i++){
+        glPolygonMode(GL_FRONT_AND_BACK, modes[i]);
+        vertices.clear();
+        colors.clear();
 
-    setVertices(segmentsX, segmentsY);
-    setColors();
+        setVertices(segmentsX, segmentsY);
 
-    shaderProgram->setAttributeArray("vertex", vertices.constData());
-    shaderProgram->enableAttributeArray("vertex");
+        if(modes[i] == GL_LINE) {
+            solidColor();
+            glLineWidth(3.0);
+            glEnable(GL_LINE_SMOOTH);
+        }else if(modes[i]== GL_POINT){
+            setColors();
+            glPointSize(5.0);
+            glEnable( GL_POINT_SMOOTH );
+        }
+        else setColors();
 
-    shaderProgram->setAttributeArray("color", colors.constData());
-    shaderProgram->enableAttributeArray("color");
+        shaderProgram->setAttributeArray("vertex", vertices.constData());
+        shaderProgram->enableAttributeArray("vertex");
 
-    glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+        shaderProgram->setAttributeArray("color", colors.constData());
+        shaderProgram->enableAttributeArray("color");
+
+        glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+    }
+
 }
 
 void Cube::drawFace(QVector3D p1, QVector3D p2, QVector3D p3, QVector3D p4,

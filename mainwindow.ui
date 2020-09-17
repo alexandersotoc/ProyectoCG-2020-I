@@ -158,7 +158,7 @@
           <string notr="true">color: rgb(172,172,172);</string>
          </property>
          <property name="text">
-          <string>Show Normal</string>
+          <string>Points</string>
          </property>
         </widget>
        </item>
@@ -885,7 +885,7 @@
              <item>
               <widget class="QSlider" name="sldScale">
                <property name="minimum">
-                <number>1</number>
+                <number>-200</number>
                </property>
                <property name="maximum">
                 <number>200</number>
@@ -897,10 +897,10 @@
                 <number>1</number>
                </property>
                <property name="value">
-                <number>100</number>
+                <number>0</number>
                </property>
                <property name="sliderPosition">
-                <number>100</number>
+                <number>0</number>
                </property>
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>

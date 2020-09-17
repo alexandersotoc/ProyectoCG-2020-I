@@ -13,23 +13,19 @@
 MyOpenGLWidget::MyOpenGLWidget(QWidget *parent)
     : QOpenGLWidget{parent}
 {
-    alpha = 0;
-    beta =  0;
+    alpha = 25;
+    beta = -25;
     zeta =  0;
-    distance = 6;
+    distance = 7;
     segmentsX = 10;
     segmentsY = 10;
     currentShape = 1;
-    mode = GL_FILL;
+    modes.append(GL_FILL);
 }
 
 void MyOpenGLWidget::setDistance(int value)
 {
-    if(value>=100){
-        distance = 6 - (value * 1.0f / 100);
-    }else{
-        distance = 6 + (value * 1.0f / 100);
-    }
+     distance = 7 - (value * 3.0f / 100);
 
     update();
 }
@@ -58,8 +54,22 @@ void MyOpenGLWidget::rotateZ(int rZ)
 
 void MyOpenGLWidget::setMode(GLenum mode)
 {
-    this->mode = mode;
+    int position = findMode(mode);
+
+    if(position == -1) modes.append(mode);
+    else modes.remove(position);
+
     update();
+}
+
+int MyOpenGLWidget::findMode(GLenum mode)
+{
+    for(int i=0; i<modes.size();i++){
+        if(modes[i] == mode)
+            return i;
+    }
+
+    return -1;
 }
 
 void MyOpenGLWidget::setSegmentsX(int _segmentsX)
@@ -83,14 +93,11 @@ void MyOpenGLWidget::setCurrentShape(int _currentShape)
 void MyOpenGLWidget::initializeGL()
 {
     glEnable(GL_DEPTH_TEST);
-    //glEnable(GL_CULL_FACE);
     glClearColor(0, 0, 0, 1);
 
     shaderProgram.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/vertexShader.vsh");
     shaderProgram.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/fragmentShader.fsh");
     shaderProgram.link();
-    
-    srand (time(NULL));
 }
 
 void MyOpenGLWidget::paintGL()
@@ -104,8 +111,8 @@ void MyOpenGLWidget::paintGL()
     QMatrix4x4 vMatrix;
 
     QMatrix4x4 cameraTransformation;
-    cameraTransformation.rotate(alpha, 1, 0, 0);
-    cameraTransformation.rotate(beta,  0, 1, 0);
+    cameraTransformation.rotate(alpha, 0, 1, 0);
+    cameraTransformation.rotate(beta,  1, 0, 0);
     cameraTransformation.rotate(zeta,  0, 0, 1);
 
     QVector3D cameraPosition = cameraTransformation * QVector3D(0, 0, distance);
@@ -118,7 +125,7 @@ void MyOpenGLWidget::paintGL()
 
     shaderProgram.setUniformValue("mvpMatrix", pMatrix * vMatrix * mMatrix);
 
-    chosenShape->draw(&shaderProgram, segmentsX, segmentsY, mode);
+    chosenShape->draw(&shaderProgram, segmentsX, segmentsY, modes);
 
     shaderProgram.disableAttributeArray("vertex");
 

@@ -68,54 +68,44 @@ void MainWindow::on_btnSpecial_clicked()
     ui->openGLWidget->setCurrentShape(5);
 }
 
-void MainWindow::on_sldSegmentsX_sliderMoved(int position)
+void MainWindow::on_sldSegmentsX_valueChanged(int value)
 {
-     qDebug() << "segmentsX position: "<<position;
-     ui->openGLWidget->setSegmentsX(position);
-     QString s = QString::number(position);
-     ui->lblSegmentsX->setText(s);
+    ui->openGLWidget->setSegmentsX(value);
+    QString s = QString::number(value);
+    ui->lblSegmentsX->setText(s);
 }
 
-void MainWindow::on_sldSegmentsY_sliderMoved(int position)
+void MainWindow::on_sldSegmentsY_valueChanged(int value)
 {
-     qDebug() << "segmentsY position: "<<position;
-     ui->openGLWidget->setSegmentsY(position);
-     QString s = QString::number(position);
-     ui->lblSegmentsY->setText(s);
+    ui->openGLWidget->setSegmentsY(value);
+    QString s = QString::number(value);
+    ui->lblSegmentsY->setText(s);
 }
 
-void MainWindow::on_sldRotateX_sliderMoved(int position)
+void MainWindow::on_sldRotateX_valueChanged(int value)
 {
-    qDebug() << "rotateX position: "<<position;
-    ui->openGLWidget->rotateX(position);
-
-    QString s = QString::number(position);
+    ui->openGLWidget->rotateX(value);
+    QString s = QString::number(value);
     ui->lblRotateX->setText(s);
-
 }
 
-void MainWindow::on_sldRotateY_sliderMoved(int position)
+void MainWindow::on_sldRotateY_valueChanged(int value)
 {
-    qDebug() << "rotateY position: "<<position;
-    ui->openGLWidget->rotateY(position);
-
-    QString s = QString::number(position);
+    ui->openGLWidget->rotateY(value);
+    QString s = QString::number(value);
     ui->lblRotateY->setText(s);
 }
 
-void MainWindow::on_sldRotateZ_sliderMoved(int position)
+void MainWindow::on_sldRotateZ_valueChanged(int value)
 {
-    qDebug() << "rotateZ position: "<<position;
-    ui->openGLWidget->rotateZ(position);
-
-    QString s = QString::number(position);
+    ui->openGLWidget->rotateZ(value);
+    QString s = QString::number(value);
     ui->lblRotateZ->setText(s);
 }
 
-void MainWindow::on_sldScale_sliderMoved(int position)
+void MainWindow::on_sldScale_valueChanged(int value)
 {
-    qDebug() << "scale position: "<<position;
-    QString s = QString::number(position);
-    ui->openGLWidget->setDistance(position);
+    QString s = QString::number(value);
+    ui->openGLWidget->setDistance(value);
     ui->lblScale->setText(s);
 }

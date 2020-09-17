@@ -9,7 +9,7 @@ class Special: public Shape {
         void setColors();
     public:
         void toString();
-        void draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY, GLenum mode);
+        void draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY, QVector<GLenum> modes);
 };
 
 #endif

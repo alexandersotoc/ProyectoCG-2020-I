@@ -76,7 +76,9 @@ void Cylinder::setVertices(int segX, int segY) {
 }
 
 void Cylinder::setColors() {
-  float r = 1.0, g = 0.0, b = 0.0;
+  float r, g , b;
+  srand(6667);
+
   for (int i = 0; i < vertices.size() ; i++ ) {
       if(i%3 == 0){
           r = (rand()%256/255.0f);
@@ -85,20 +87,39 @@ void Cylinder::setColors() {
       }
       colors.append(QVector3D(r,g,b));
   }
+
 }
 
-void Cylinder::draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY, GLenum mode) {
-    glPolygonMode(GL_FRONT_AND_BACK, mode);
-    setVertices(segmentsX, segmentsY);
-    setColors();
-    shaderProgram->setAttributeArray("vertex",vertices.constData());
-    shaderProgram->enableAttributeArray("vertex");
+void Cylinder::draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY, QVector<GLenum> modes) {
+    if(modes.isEmpty()) return;
 
-    shaderProgram->setAttributeArray("color", colors.constData());
-    shaderProgram->enableAttributeArray("color");
+    for(int i=0;i<modes.size();i++){
+        glPolygonMode(GL_FRONT_AND_BACK, modes[i]);
+        vertices.clear();
+        colors.clear();
 
-    glDrawArrays(GL_TRIANGLE_FAN, 0, segmentsX);
-    glDrawArrays(GL_TRIANGLE_FAN, segmentsX , segmentsX);
-    glDrawArrays(GL_TRIANGLES, 2*segmentsX  , vertices.size() - 2*segmentsX);
+        setVertices(segmentsX, segmentsY);
+
+        if(modes[i] == GL_LINE) {
+            solidColor();
+            glLineWidth(3.0);
+            glEnable(GL_LINE_SMOOTH);
+        }else if(modes[i]== GL_POINT){
+            setColors();
+            glPointSize(5.0);
+            glEnable( GL_POINT_SMOOTH );
+        }
+        else setColors();
+
+        shaderProgram->setAttributeArray("vertex", vertices.constData());
+        shaderProgram->enableAttributeArray("vertex");
+
+        shaderProgram->setAttributeArray("color", colors.constData());
+        shaderProgram->enableAttributeArray("color");
+
+        glDrawArrays(GL_TRIANGLE_FAN, 0, segmentsX);
+        glDrawArrays(GL_TRIANGLE_FAN, segmentsX , segmentsX);
+        glDrawArrays(GL_TRIANGLES, 2*segmentsX  , vertices.size() - 2*segmentsX);
+    }
 
 }
