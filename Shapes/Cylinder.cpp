@@ -87,8 +87,8 @@ void Cylinder::setColors() {
   }
 }
 
-void Cylinder::draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY) {
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+void Cylinder::draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY, GLenum mode) {
+    glPolygonMode(GL_FRONT_AND_BACK, mode);
     setVertices(segmentsX, segmentsY);
     setColors();
     shaderProgram->setAttributeArray("vertex",vertices.constData());

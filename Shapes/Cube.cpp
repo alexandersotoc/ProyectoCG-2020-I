@@ -50,7 +50,10 @@ void Cube::setColors() {
     }
 }
 
-void Cube::draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY) {
+void Cube::draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY, GLenum mode) {
+
+    glPolygonMode(GL_FRONT_AND_BACK, mode);
+
     setVertices(segmentsX, segmentsY);
     setColors();
 
