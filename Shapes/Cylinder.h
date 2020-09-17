@@ -3,12 +3,15 @@
 #include "Shape.h"
 
 class Cylinder: public Shape {
+    public:
+        Cylinder();
+        void toString();
+        void draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY);
     private:
         void setVertices(int segmentsX, int segmentsY);
         void setColors();
-    public:
-        void toString();
-        void draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY);
+        float cylinder_height;
+        float cylinder_radius;
 };
 
 #endif

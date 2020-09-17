@@ -52,7 +52,7 @@ void MyOpenGLWidget::setCurrentShape(int _currentShape)
 void MyOpenGLWidget::initializeGL()
 {
     glEnable(GL_DEPTH_TEST);
-    glEnable(GL_CULL_FACE);
+    //glEnable(GL_CULL_FACE);
     glClearColor(0, 0, 0, 1);
 
     shaderProgram.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/vertexShader.vsh");
