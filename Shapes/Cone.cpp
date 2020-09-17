@@ -37,20 +37,37 @@ void Cone::setColors()
     }
 }
 
-void Cone::draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY, GLenum mode)
+void Cone::draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY, QVector<GLenum> modes)
 {
-    glPolygonMode(GL_FRONT_AND_BACK, mode);
+    if(modes.isEmpty()) return;
 
-    setVertices(segmentsX, segmentsY);
-    setColors();
+    for(int i=0;i<modes.size();i++){
+        glPolygonMode(GL_FRONT_AND_BACK, modes[i]);
+        vertices.clear();
+        colors.clear();
 
-    shaderProgram->setAttributeArray("vertex", vertices.constData());
-    shaderProgram->enableAttributeArray("vertex");
+        setVertices(segmentsX, segmentsY);
 
-    shaderProgram->setAttributeArray("color", colors.constData());
-    shaderProgram->enableAttributeArray("color");
+        if(modes[i] == GL_LINE) {
+            solidColor();
+            glLineWidth(3.0);
+            glEnable(GL_LINE_SMOOTH);
+        }else if(modes[i]== GL_POINT){
+            setColors();
+            glPointSize(5.0);
+            glEnable( GL_POINT_SMOOTH );
+        }
+        else setColors();
 
-    glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+        shaderProgram->setAttributeArray("vertex", vertices.constData());
+        shaderProgram->enableAttributeArray("vertex");
+
+        shaderProgram->setAttributeArray("color", colors.constData());
+        shaderProgram->enableAttributeArray("color");
+
+        glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+    }
+
 }
 
 void Cone::drawSideCone(float centerX, float centerY, float centerZ, float radius, int numberOfSides,

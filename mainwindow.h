@@ -34,19 +34,17 @@ private slots:
 
     void on_chkNormal_stateChanged(int arg1);
 
-    void on_sldSegmentsX_sliderMoved(int position);
+    void on_sldSegmentsX_valueChanged(int value);
 
-    void on_sldSegmentsY_sliderMoved(int position);
+    void on_sldSegmentsY_valueChanged(int value);
 
-    void on_sldRotateX_sliderMoved(int position);
+    void on_sldRotateX_valueChanged(int value);
 
-    void on_sldRotateY_sliderMoved(int position);
+    void on_sldRotateY_valueChanged(int value);
 
+    void on_sldRotateZ_valueChanged(int value);
 
-
-    void on_sldRotateZ_sliderMoved(int position);
-
-    void on_sldScale_sliderMoved(int position);
+    void on_sldScale_valueChanged(int value);
 
 private:
     Ui::MainWindow *ui;

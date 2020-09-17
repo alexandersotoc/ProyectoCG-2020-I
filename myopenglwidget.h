@@ -33,6 +33,7 @@ private:
     void qColorToRGB(const QColor &C, float &r, float &g, float &b) const;
     float normalize_0_1(float val, float min, float max) const;
     double generateRandomNumber();
+    int findMode(GLenum mode);
     QMatrix4x4 pMatrix;
     QOpenGLShaderProgram shaderProgram;
 
@@ -47,7 +48,7 @@ private:
     double distance;
     QPoint lastMousePosition;
 
-    GLenum mode;
+    QVector<GLenum> modes;
 };
 
 #endif // MYOPENGLWIDGET_H

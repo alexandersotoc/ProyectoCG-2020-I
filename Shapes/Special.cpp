@@ -35,28 +35,60 @@ void Special::setVertices(int segX, int segY) {
 }
 
 void Special::setColors() {
-    int cantidadDePuntos = segmentsX  * (segmentsY + 1) * 2;
+//    int cantidadDePuntos = segmentsX  * (segmentsY + 1) * 2;
 
-    for (int i = 0; i < cantidadDePuntos; i++) {
-        colors.push_back(QVector3D(generateRandomNumber(), generateRandomNumber(), generateRandomNumber()));
+//    for (int i = 0; i < cantidadDePuntos; i++) {
+//        colors.push_back(QVector3D(generateRandomNumber(), generateRandomNumber(), generateRandomNumber()));
+//    }
+
+    float r, g, b;
+    srand(6667);
+
+    for (int i = 0; i < vertices.size(); i++)
+    {
+        if (i % 3 == 0)
+        {
+            r = (rand() % 256) / 255.0f;
+            g = (rand() % 256) / 255.0f;
+            b = (rand() % 256) / 255.0f;
+        }
+
+        colors.push_back(QVector3D(r, g, b));
     }
 }
 
-void Special::draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY, GLenum mode) {
+void Special::draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY, QVector<GLenum> modes) {
+    if(modes.isEmpty()) return;
 
-    glPolygonMode(GL_FRONT_AND_BACK, mode);
 
-    setVertices(segmentsX, segmentsY);
-    setColors();
+    for(int i=0;i<modes.size();i++){
+        glPolygonMode(GL_FRONT_AND_BACK, modes[i]);
+        vertices.clear();
+        colors.clear();
 
-    shaderProgram->setAttributeArray("vertex", vertices.constData());
-    shaderProgram->enableAttributeArray("vertex");
+        setVertices(segmentsX, segmentsY);
 
-    shaderProgram->setAttributeArray("color", colors.constData());
-    shaderProgram->enableAttributeArray("color");
+        if(modes[i] == GL_LINE) {
+            solidColor();
+            glLineWidth(3.0);
+            glEnable(GL_LINE_SMOOTH);
+        }else if(modes[i]== GL_POINT){
+            setColors();
+            glPointSize(5.0);
+            glEnable( GL_POINT_SMOOTH );
+        }
+        else setColors();
 
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, vertices.size());
-    glShadeModel(GL_FLAT);
+        shaderProgram->setAttributeArray("vertex", vertices.constData());
+        shaderProgram->enableAttributeArray("vertex");
+
+        shaderProgram->setAttributeArray("color", colors.constData());
+        shaderProgram->enableAttributeArray("color");
+
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, vertices.size());
+        glShadeModel(GL_FLAT);
+    }
+
 }
 
 double Special::generateRandomNumber()

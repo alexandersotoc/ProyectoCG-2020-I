@@ -13,7 +13,7 @@ class Cube: public Shape {
             int segments);
     public:
         void toString();
-        void draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY, GLenum mode);
+        void draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY, QVector<GLenum> modes);
 };
 
 #endif

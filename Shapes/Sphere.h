@@ -13,7 +13,7 @@ class Sphere: public Shape {
         float FinalPhi=2*PI;
     public:
         void toString();
-        void draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY, GLenum mode);
+        void draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY, QVector<GLenum> modes);
 };
 
 #endif
