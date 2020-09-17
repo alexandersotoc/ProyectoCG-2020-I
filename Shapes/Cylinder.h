@@ -6,7 +6,7 @@ class Cylinder: public Shape {
     public:
         Cylinder();
         void toString();
-        void draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY);
+        void draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY, GLenum mode);
     private:
         void setVertices(int segmentsX, int segmentsY);
         void setColors();

@@ -18,6 +18,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_chkWire_stateChanged(int arg1)
 {
     qDebug() << "Wire selected "<<arg1;
+    ui->openGLWidget->setMode(GL_LINE);
 }
 
 void MainWindow::on_chkSmooth_stateChanged(int arg1)
@@ -28,11 +29,13 @@ void MainWindow::on_chkSmooth_stateChanged(int arg1)
 void MainWindow::on_chkFill_stateChanged(int arg1)
 {
     qDebug() << "Fill selected "<<arg1;
+    ui->openGLWidget->setMode(GL_FILL);
 }
 
 void MainWindow::on_chkNormal_stateChanged(int arg1)
 {
     qDebug() << "Normal selected "<<arg1;
+    ui->openGLWidget->setMode(GL_POINT);
 }
 
 void MainWindow::on_btnCube_clicked()

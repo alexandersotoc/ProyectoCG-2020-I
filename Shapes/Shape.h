@@ -16,7 +16,7 @@ class Shape {
     public:
         static Shape *chooseShape(int choice);
         virtual void toString() = 0;
-        virtual void draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY) = 0;
+        virtual void draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY, GLenum mode) = 0;
 };
 
 #endif

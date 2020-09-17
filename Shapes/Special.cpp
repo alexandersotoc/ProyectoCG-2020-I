@@ -42,7 +42,10 @@ void Special::setColors() {
     }
 }
 
-void Special::draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY) {
+void Special::draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY, GLenum mode) {
+
+    glPolygonMode(GL_FRONT_AND_BACK, mode);
+
     setVertices(segmentsX, segmentsY);
     setColors();
 

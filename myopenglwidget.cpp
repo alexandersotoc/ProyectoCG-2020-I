@@ -20,6 +20,7 @@ MyOpenGLWidget::MyOpenGLWidget(QWidget *parent)
     segmentsX = 10;
     segmentsY = 10;
     currentShape = 1;
+    mode = GL_FILL;
 }
 
 void MyOpenGLWidget::setDistance(int value)
@@ -52,6 +53,12 @@ void MyOpenGLWidget::rotateY(int rY)
 void MyOpenGLWidget::rotateZ(int rZ)
 {
     zeta = rZ;
+    update();
+}
+
+void MyOpenGLWidget::setMode(GLenum mode)
+{
+    this->mode = mode;
     update();
 }
 
@@ -111,7 +118,7 @@ void MyOpenGLWidget::paintGL()
 
     shaderProgram.setUniformValue("mvpMatrix", pMatrix * vMatrix * mMatrix);
 
-    chosenShape->draw(&shaderProgram, segmentsX, segmentsY);
+    chosenShape->draw(&shaderProgram, segmentsX, segmentsY, mode);
 
     shaderProgram.disableAttributeArray("vertex");
 

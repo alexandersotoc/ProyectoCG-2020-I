@@ -21,6 +21,7 @@ public:
     void rotateX(int rX);
     void rotateY(int rY);
     void rotateZ(int rZ);
+    void setMode(GLenum mode);
 protected:
     void initializeGL() override;
     void paintGL() override;
@@ -46,6 +47,7 @@ private:
     double distance;
     QPoint lastMousePosition;
 
+    GLenum mode;
 };
 
 #endif // MYOPENGLWIDGET_H

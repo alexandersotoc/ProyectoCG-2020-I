@@ -37,8 +37,10 @@ void Cone::setColors()
     }
 }
 
-void Cone::draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY)
+void Cone::draw(QOpenGLShaderProgram *shaderProgram, int segmentsX, int segmentsY, GLenum mode)
 {
+    glPolygonMode(GL_FRONT_AND_BACK, mode);
+
     setVertices(segmentsX, segmentsY);
     setColors();
 
