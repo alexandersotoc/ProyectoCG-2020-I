@@ -141,6 +141,9 @@
          <property name="text">
           <string>Fill</string>
          </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
        <item>
@@ -349,7 +352,7 @@
              <enum>Qt::RichText</enum>
             </property>
             <property name="alignment">
-             <set>Qt::AlignCenter</set>
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
@@ -359,7 +362,7 @@
              <number>3</number>
             </property>
             <property name="maximum">
-             <number>30</number>
+             <number>60</number>
             </property>
             <property name="sliderPosition">
              <number>10</number>
@@ -435,6 +438,9 @@
             <property name="text">
              <string>10</string>
             </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
            </widget>
           </item>
           <item>
@@ -443,7 +449,7 @@
              <number>3</number>
             </property>
             <property name="maximum">
-             <number>30</number>
+             <number>60</number>
             </property>
             <property name="sliderPosition">
              <number>10</number>
@@ -565,6 +571,9 @@
                <property name="text">
                 <string>0</string>
                </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
               </widget>
              </item>
              <item>
@@ -663,6 +672,9 @@
                </property>
                <property name="text">
                 <string>0</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                </property>
               </widget>
              </item>
@@ -763,6 +775,9 @@
                <property name="text">
                 <string>0</string>
                </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
               </widget>
              </item>
              <item>
@@ -861,6 +876,9 @@
                </property>
                <property name="text">
                 <string>1</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                </property>
               </widget>
              </item>
