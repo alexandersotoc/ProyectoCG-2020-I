@@ -37,18 +37,14 @@ private:
     int findMode(GLenum mode);
     QMatrix4x4 pMatrix;
     QOpenGLShaderProgram shaderProgram;
-
     int currentShape;
-
     int segmentsX;
     int segmentsY;
-
     double alpha;
     double beta;
     double zeta;
     double distance;
     QPoint lastMousePosition;
-
     QVector<GLenum> modes;
     boolean color;
 };
