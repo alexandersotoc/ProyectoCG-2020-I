@@ -13,8 +13,9 @@
 MyOpenGLWidget::MyOpenGLWidget(QWidget *parent)
     : QOpenGLWidget{parent}
 {
-    alpha = 25;
-    beta = -25;
+    alpha = 0;
+    beta =  0;
+    zeta =  0;
     distance = 2.5;
     segmentsX = 8;
     segmentsY = 25;
@@ -29,6 +30,24 @@ void MyOpenGLWidget::setDistance(int value)
 
 void MyOpenGLWidget::drawSphere()
 {
+}
+
+void MyOpenGLWidget::rotateX(int rX)
+{
+    alpha = rX;
+    update();
+}
+
+void MyOpenGLWidget::rotateY(int rY)
+{
+    beta = rY;
+    update();
+}
+
+void MyOpenGLWidget::rotateZ(int rZ)
+{
+    zeta = rZ;
+    update();
 }
 
 void MyOpenGLWidget::setSegmentsX(int _segmentsX)
@@ -73,8 +92,9 @@ void MyOpenGLWidget::paintGL()
     QMatrix4x4 vMatrix;
 
     QMatrix4x4 cameraTransformation;
-    cameraTransformation.rotate(alpha, 0, 1, 0);
-    cameraTransformation.rotate(beta, 1, 0, 0);
+    cameraTransformation.rotate(alpha, 1, 0, 0);
+    cameraTransformation.rotate(beta,  0, 1, 0);
+    cameraTransformation.rotate(zeta,  0, 0, 1);
 
     QVector3D cameraPosition = cameraTransformation * QVector3D(0, 0, distance);
     QVector3D cameraUpDirection = cameraTransformation * QVector3D(0, 1, 0);
